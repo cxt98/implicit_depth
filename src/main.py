@@ -21,7 +21,7 @@ def main():
     if args.cfg_paths is not None:
         for cfg_path in args.cfg_paths:
             opt.update(cfg_path)
-    
+            
     # set up random or deterministic training
     if opt.seed is None:
         torch.backends.cudnn.benchmark = True 

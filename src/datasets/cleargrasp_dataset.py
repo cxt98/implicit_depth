@@ -197,7 +197,6 @@ def get_dataset(dataset_dir, params, exp_type, obj_type='known'):
             dataset_subdir.append(osp.join(dataset_dir, 'cleargrasp-dataset-test-val', 'real-val'))
         else:
             raise NotImplementedError('OBJ type not supported.')
-
     # set params
     params = params.copy()
     if exp_type != 'train':

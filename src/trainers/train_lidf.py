@@ -10,6 +10,8 @@ import pickle
 import importlib
 import numpy as np
 import cv2
+import matplotlib
+matplotlib.use('TKAgg')
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 
@@ -27,6 +29,7 @@ import datasets.cleargrasp_synthetic_dataset as cleargrasp_syn
 import datasets.cleargrasp_dataset as cleargrasp
 import datasets.omniverse_dataset as omniverse
 import datasets.mixed_dataset as mixed_dataset
+import datasets.clearpose_dataset as clearpose
 import constants
 import models.pipeline as pipeline
 import utils.point_utils as point_utils
@@ -157,6 +160,8 @@ class TrainLIDF(object):
             elif self.opt.dataset.type == 'mixed':
                 train_dataset = mixed_dataset.get_dataset(self.opt.dataset.cleargrasp_root_dir, 
                                     self.opt.dataset.omniverse_root_dir, params, exp_type='train')
+            elif self.opt.dataset.type == 'clearpose':
+                train_dataset = clearpose.get_dataset(self.opt.dataset.clearpose_root_dir, params, exp_type='train')
             
             # set train loader
             if self.opt.dist.ddp:
