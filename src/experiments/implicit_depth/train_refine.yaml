@@ -2,21 +2,20 @@
 trainer_name: refine
 exp_type: train
 base_log_dir: ../logs/refine
-lidf_ckpt_path: 
+lidf_ckpt_path: ../logs/lidf/ckpt/bn4_lr0.001_nepo60_Adam_gres8_msn20000_vsn10000_rgb_resnet_embed_ROIAlign_pnet_twostage_offdec_IEF_niter2_probdec_IMNET_scatter_Maxpool_epo6_prob_ray_sn10.0_epo0_clearpose/latest_network.pth
 log_name: 
 custom_postfix: ''
 resume: latest_network.pth
 gpu_id: 
-vis_gpu: '0,1,2,3'
+vis_gpu: '0'
 # debug: True
-
 
 # seg mask setting
 mask_type: all
 
 # data setting
 dataset:
-  type: mixed
+  type: clearpose
   cleargrasp_root_dir: ../datasets/cleargrasp
   omniverse_root_dir: ../datasets/omniverse
   use_data_augmentation: True
@@ -31,6 +30,7 @@ dataset:
   ellipse_dropout_mean: 20
   ellipse_gamma_shape: 10.0
   ellipse_gamma_scale: 1.0
+  clearpose_root_dir: /media/cxt/6358C6357FEBD1E6/clearpose_downsample_100
 
 # model setting
 model:
@@ -93,7 +93,7 @@ grid:
 
 # training setting
 training:
-  batch_size: 32
+  batch_size: 4
   valid_batch_size: 1
   nepochs: 30
   nepoch_decay: 30
@@ -117,7 +117,7 @@ loss:
 
 # distributed setting, only used it when multiprocessing-distributed set to True
 dist:
-  ddp: True
+  ddp: False
   dist_url: tcp://127.0.0.1:12345
   dist_backend: nccl
   # nodes number
@@ -125,7 +125,7 @@ dist:
   # rank of current node
   node_rank: 0
   # GPUs/Process number per node
-  ngpus_per_node: 4
+  ngpus_per_node: 1
   # totol GPU number. equal to nodes_num * ngpus_per_node. handled by create trainer
   world_size: 
   # gpu id among all nodes all processes, handled by create trainer
